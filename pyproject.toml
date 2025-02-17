@@ -1,7 +1,7 @@
 [project]
 name = "climviz"
 version = "0.1.0"
-description = "Add your description here"
+description = "Climate Models Visualization"
 readme = "README.md"
 authors = [
     { name = "Simão Rodrigues", email = "simaor@gmail.com" }

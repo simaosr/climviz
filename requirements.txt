@@ -1,0 +1,9 @@
+numpy
+climlab==0.8.2
+#git+https://github.com/climlab/climlab-rrtmg.git@b985b7d6de9e9a02fff605b5261fe925c0e07245
+matplotlib
+pooch
+dash
+dash_iconify
+pip
+icecream

@@ -192,7 +192,7 @@ def make_indicator_card(
         color = "red"
         symbol = "↓"
 
-    title_text = dmc.Text(title, size="lg")
+    title_text = dmc.Text(title, size="xl")
     if hover_text is not None:
         title_text = dmc.Group(
             [
@@ -221,9 +221,9 @@ def make_indicator_card(
             ),
             dmc.Group(
                 [
-                    dmc.Text(
+                    dmc.Title(
                         f"{symbol} {abs(indicator):.2f} {unit}",
-                        size="xl",
+                        order=1,
                         c=color,
                     ),
                 ],

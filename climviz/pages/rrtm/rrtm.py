@@ -29,7 +29,6 @@ spec = importlib.util.find_spec("climlab_rrtmg")
 if spec is not None:
     have_rrtm = True
 
-
 if have_rrtm:
     dash.register_page(
         __name__,
@@ -38,9 +37,6 @@ if have_rrtm:
         description=PAGE_DESC,
         image=PAGE_IMG,
     )
-
-# Style for the page
-dmc.add_figure_templates(default="mantine_light")
 
 
 # About this model content

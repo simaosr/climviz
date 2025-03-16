@@ -14,6 +14,7 @@ from dash_iconify import DashIconify
 
 from climviz.helpers.layout import create_appshell, make_navbar
 
+
 # Initialize the Dash app
 _dash_renderer._set_react_version("18.2.0")
 
@@ -23,6 +24,9 @@ app = Dash(
     external_stylesheets=dmc.styles.ALL,
     suppress_callback_exceptions=True,
 )
+
+# Style for the page
+dmc.add_figure_templates(default="mantine_light")
 
 theme_toggle = dmc.Switch(
     offLabel=DashIconify(

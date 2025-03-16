@@ -13,13 +13,19 @@ from climviz.pages.rrtm.common import id_func, selectors
 temp_selector_with_button = dmc.Group(
     [
         selectors["surface_temperature"],
-        dmc.ActionIcon(
-            children=DashIconify(icon="material-symbols:target"),
-            size="input-sm",
-            id=id_func("find-eq-button"),
+        dmc.Tooltip(
+            label="Find Equilibrium Temperature",
+            children=dmc.ActionIcon(
+                children=DashIconify(icon="material-symbols:target"),
+                size="input-sm",
+                id=id_func("find-eq-button"),
+            ),
         ),
     ],
     align="end",
+    grow=False,
+    preventGrowOverflow=False,
+    wrap="nowrap",
 )
 
 

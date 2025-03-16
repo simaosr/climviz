@@ -13,7 +13,7 @@ from dash import (
 )
 from dash_iconify import DashIconify
 
-from climviz.helpers.layout import create_appshell, make_footer, make_navbar
+from climviz.helpers.layout import create_appshell, make_navbar
 
 # Initialize the Dash app
 _dash_renderer._set_react_version("18.2.0")
@@ -51,8 +51,9 @@ navbar_items = [
 header_items = [
     dmc.Group(
         [
-            dmc.Burger(id="burger", size="md", opened=False),
-            dmc.Title("Climate Models Visualization Tool", c="blue"),
+            # dmc.Burger(id="burger", size="md", opened=False),
+            dmc.Title("ClimViz", c="blue"),
+            theme_toggle,
         ],
         h="100%",
         px="md",
@@ -65,7 +66,12 @@ app.layout = create_appshell(
     header=header_items,
     content=dash.page_container,
     navbar=make_navbar(navbar_items),
-    footer=make_footer(),
+    footer=dmc.Center(
+        dmc.Text(
+            "Climate Models Visualization Tool - Simão Rodrigues",
+            c="blue",
+        )
+    ),
     aside=None,
     extra=dcc.Store(id="models_options", storage_type="session", data={}),
 )

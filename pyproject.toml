@@ -4,19 +4,25 @@ version = "0.1.0"
 description = "Climate Models Visualization"
 readme = "README.md"
 authors = [
-    { name = "Simão Rodrigues", email = "simaor@gmail.com" }
+    { name = "Simão Rodrigues"}
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "climlab==0.8.2",
+    "climlab==0.9.1",
     "dash>=2.18.2",
     "dash-iconify>=0.1.2",
     "dash-mantine-components>=0.15.3",
     "icecream>=2.1.4",
     "matplotlib>=3.10.0",
-    "numpy>=2.2.2",
     "pip>=25.0",
     "pooch>=1.8.2",
+    "pydantic",
+    "numpy",
+    "climlab-rrtmg",
+    "netcdf4>=1.7.2",
+    "h5netcdf>=1.6.1",
+    "climlab-cam3-radiation",
+    "climlab-emanuel-convection",
 ]
 
 [project.scripts]
@@ -27,5 +33,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv.sources]
-climlab-rrtmg = { git = "https://github.com/climlab/climlab-rrtmg.git", rev = "abcbeccfa6f63b0babefd637a7fcc5a6c1590fcd" }
+climlab-rrtmg = { git = "https://github.com/climlab/climlab-rrtmg.git" }
+climlab-cam3-radiation = { git = "https://github.com/climlab/climlab-cam3-radiation" }
+climlab-emanuel-convection = { git = "https://github.com/climlab/climlab-emanuel-convection" }
 

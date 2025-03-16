@@ -7,15 +7,16 @@ import dash_mantine_components as dmc
 import plotly.express as px
 
 
-def create_grid(columns_dict):
-    layout = html.Div(
-        dmc.Grid(
-            children=[
-                dmc.GridCol(col["content"], span=col["size"], **col.get("options", {}))
-                for col in columns_dict
-            ],
-        ),
-        style={"padding": "1rem"},
+def create_grid(columns_dict: list[dict], grid_options: dict | None = None) -> dmc.Grid:
+    if grid_options is None:
+        grid_options = {}
+
+    layout = dmc.Grid(
+        children=[
+            dmc.GridCol(col["content"], span=col["size"], **col.get("options", {}))
+            for col in columns_dict
+        ],
+        **grid_options,
     )
 
     return layout
@@ -78,7 +79,7 @@ def create_appshell(
 
 
 def make_footer() -> list:
-    return ["footer"]
+    return ["Footer"]
 
 
 def make_header() -> list:
@@ -116,6 +117,7 @@ def make_tabbed_content(
                 dmc.TabsPanel(
                     content["children"],
                     value=str(content.get("value", val + 1)),
+                    mt="md",
                     **content.get("extra_panel_args", {}),
                 )
                 for val, (name, content) in enumerate(content_dict.items())
@@ -123,6 +125,32 @@ def make_tabbed_content(
         ],
         value=value,
         id=id,
+    )
+
+
+def div_in_card(
+    id: str,
+    div_options: dict | None = None,
+    card_options: dict | None = None,
+):
+    default_card_options = {
+        "withBorder": True,
+        "shadow": "sm",
+        "radius": "md",
+        "padding": 0,
+    }
+
+    if div_options is None:
+        div_options = {}
+
+    if card_options is None:
+        card_options = {}
+
+    card_options = {**default_card_options, **div_options}
+
+    return dmc.Card(
+        children=[html.Div(id=id, **div_options)],
+        **card_options,
     )
 
 
@@ -151,4 +179,100 @@ def graph_in_card(
     return dmc.Card(
         children=[dcc.Graph(id_func(f"{prefix}{name}"), **graph_options)],
         **card_options,
+    )
+
+
+def make_indicator_card(
+    indicator: float, title: str, unit: str, hover_text: str | None = None
+) -> dmc.Card:
+    if indicator > 0.0:
+        color = "green"
+        # arrow up icon
+        symbol = "↑"
+    elif indicator == 0.0:
+        color = "blue"
+        symbol = "↔"
+    else:
+        color = "red"
+        symbol = "↓"
+
+    title_text = dmc.Text(title, size="lg")
+    if hover_text is not None:
+        title_text = dmc.Group(
+            [
+                title_text,
+                dmc.HoverCard(
+                    withArrow=True,
+                    width=200,
+                    children=[
+                        dmc.HoverCardTarget("ⓘ"),
+                        dmc.HoverCardDropdown(
+                            dmc.Text(
+                                hover_text,
+                                size="sm",
+                            )
+                        ),
+                    ],
+                    position="top",
+                ),
+            ]
+        )
+
+    output = dmc.Card(
+        children=[
+            dmc.CardSection(
+                dmc.Center(title_text),
+            ),
+            dmc.Group(
+                [
+                    dmc.Text(
+                        f"{symbol} {abs(indicator):.2f} {unit}",
+                        size="xl",
+                        c=color,
+                    ),
+                ],
+                mt="md",
+                justify="center",
+            ),
+        ],
+        withBorder=True,
+        shadow="sm",
+        radius="md",
+    )
+
+    return output
+
+
+def make_home_card(
+    title: str, description: str, href: str, image: dmc.Image | None = None
+) -> dmc.Card:
+    return dmc.Card(
+        children=[
+            dmc.CardSection(image),
+            dmc.Group(
+                [
+                    dmc.Text(title, fw=500),
+                    # dmc.Badge("On Sale", color="pink"),
+                ],
+                justify="space-between",
+                mt="md",
+                mb="xs",
+            ),
+            dmc.Text(
+                description,
+                size="sm",
+                c="dimmed",
+            ),
+            dmc.Button(
+                html.A(dmc.Text("Go to model"), href=href),
+                color="blue",
+                fullWidth=True,
+                mt="md",
+                radius="md",
+            ),
+        ],
+        withBorder=True,
+        shadow="sm",
+        radius="md",
+        w=350,
     )

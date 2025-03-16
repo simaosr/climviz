@@ -1,13 +1,12 @@
 import dash
-from dash import dcc
-from dash import html
+import dash_mantine_components as dmc
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import callback, clientside_callback, Output, Input
+from dash import Input, Output, callback, clientside_callback, dcc, html
 
-import dash_mantine_components as dmc
+from dash_iconify import DashIconify
 
-from climviz.helpers.layout import create_grid
+from climviz.helpers.layout import create_grid, make_home_card
 
 dash.register_page(__name__, path="/")
 
@@ -16,26 +15,37 @@ dash.register_page(__name__, path="/")
 layout = create_grid(
     [
         {
-            "content": dcc.Link(
+            "content": make_home_card(
+                page["name"],
+                page.get("description", ""),
                 href=f"/{page['name']}",
-                children=[
-                    dmc.Card(
-                        children=[dmc.Text(page["name"])],
-                        withBorder=True,
-                    )
-                ],
+                image=dmc.Image(
+                    src=dash.get_asset_url(page.get("image", "")),
+                    h=160,
+                    alt=page["name"],
+                )
+                if page.get("image", None)
+                else None,
             ),
             "size": 4,
         }
         for page in dash.page_registry.values()
         if page["path"] != "/"
-    ]
+    ],
+    grid_options={"justify": "space-around", "align": "stretch"},
 )
 
 layout = dmc.Container(
     children=[
-        dmc.Text("Welcome to the Climate Visualization Tool"),
+        dmc.Blockquote(
+            "Welcome to the Climate Visualization Tool."
+            "Chose the model you want to visualize by chosing one card of selecting the model from the menu on the left.",
+            icon=DashIconify(icon="codicon:info", width=30),
+            color="blue",
+            m="md",
+        ),
         layout,
     ],
+    fluid=True,
     style={"textAlign": "center"},
 )

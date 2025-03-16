@@ -1,10 +1,6 @@
 from dash import dcc
 from dash import html
-import pandas as pd
-from icecream import ic
 import dash_mantine_components as dmc
-
-import plotly.express as px
 
 
 def create_grid(columns_dict: list[dict], grid_options: dict | None = None) -> dmc.Grid:

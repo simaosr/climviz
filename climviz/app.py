@@ -3,7 +3,6 @@ import dash_mantine_components as dmc
 from dash import (
     Dash,
     dcc,
-    html,
     _dash_renderer,
     Input,
     Output,

@@ -1,8 +1,6 @@
 import dash_mantine_components as dmc
 from dash import dcc, html
 from dash_iconify import DashIconify
-import dash
-from dash.dependencies import Input, Output
 
 
 def unique_list(i_list):

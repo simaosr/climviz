@@ -1,5 +1,4 @@
 import dash_mantine_components as dmc
-from dash_iconify import DashIconify
 
 
 # Card component with a title, and a value with an arrow depending if it is positive or negative

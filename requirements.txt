@@ -11,3 +11,4 @@ pip
 icecream
 netcdf4
 h5netcdf
+pre-commit

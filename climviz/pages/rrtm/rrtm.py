@@ -1,21 +1,18 @@
+# Check if RRTM model is available (in the climlab_rrtm package)
+import importlib
+
 import dash
 import dash_mantine_components as dmc
 import numpy as np
 import plotly.graph_objects as go
-from dash import Input, Output, State, callback, ctx, dash_table, dcc, html
-from dash.exceptions import PreventUpdate
+from dash import Input, Output, State, callback, dash_table, dcc, html
 from dash_iconify import DashIconify
 from icecream import ic
 
-from climviz.components.div_based import CustomMantineNumberInput
-from climviz.components.dmc_based import indicator_card
 from climviz.helpers.layout import (
-    create_grid,
-    graph_in_card,
     make_indicator_card,
     make_tabbed_content,
 )
-from climviz.helpers.utils import make_page_id_func
 from climviz.models.rrtm import (
     absorber_vmr,
     calc_olr,
@@ -23,18 +20,14 @@ from climviz.models.rrtm import (
     make_fig_atm_profile,
     make_fig_rad_profile,
 )
-
 from climviz.pages.rrtm.common import PAGE_DESC, PAGE_IMG, PAGE_NAME, id_func, selectors
 from climviz.pages.rrtm.exploration import tab_content as tab1_content
 from climviz.pages.rrtm.sensitivity_analysis import sensitivity_layout
 
-# Check if RRTM model is available (in the climlab_rrtm package)
-try:
-    import climlab_rrtmg
-
+have_rrtm = False
+spec = importlib.util.find_spec("climlab_rrtmg")
+if spec is not None:
     have_rrtm = True
-except ImportError:
-    have_rrtm = False
 
 
 if have_rrtm:

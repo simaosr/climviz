@@ -1,9 +1,8 @@
 from functools import lru_cache
 from pathlib import Path
 import numpy as np
-import matplotlib.pyplot as plt
 import xarray as xr
-from numpy import cos, deg2rad, log
+from numpy import cos, deg2rad
 import climlab
 import plotly.graph_objects as go
 

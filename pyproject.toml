@@ -23,6 +23,7 @@ dependencies = [
     "h5netcdf>=1.6.1",
     "climlab-cam3-radiation",
     "climlab-emanuel-convection",
+    "pre-commit>=4.1.0",
 ]
 
 [project.scripts]

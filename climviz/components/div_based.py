@@ -1,6 +1,5 @@
 from typing import Callable
 from dash import callback
-from dash import dcc
 from dash import html
 from dash import Input
 from dash import Output

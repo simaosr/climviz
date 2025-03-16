@@ -1,8 +1,5 @@
 import dash
 import dash_mantine_components as dmc
-import plotly.express as px
-import plotly.graph_objects as go
-from dash import Input, Output, callback, clientside_callback, dcc, html
 
 from dash_iconify import DashIconify
 

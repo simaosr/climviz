@@ -42,6 +42,22 @@ theme_toggle = dmc.Switch(
     color="grey",
 )
 
+info_toggle = dmc.Switch(
+    offLabel=DashIconify(
+        icon="radix-icons:info-circle",
+        width=15,
+        color=dmc.DEFAULT_THEME["colors"]["yellow"][8],
+    ),
+    onLabel=DashIconify(
+        icon="radix-icons:info-circle",
+        width=15,
+        color=dmc.DEFAULT_THEME["colors"]["yellow"][6],
+    ),
+    id="info-optional-toggle",
+    persistence=True,
+    color="grey",
+)
+
 # Prepare navbar to list all possible pages
 possible_pages = dash.page_registry
 navbar_items = [
@@ -57,6 +73,7 @@ header_items = [
             # dmc.Burger(id="burger", size="md", opened=False),
             dmc.Title("ClimViz", c="blue"),
             theme_toggle,
+            info_toggle,
         ],
         h="100%",
         px="md",
@@ -88,6 +105,25 @@ clientside_callback(
     """,
     Output("color-scheme-toggle", "id"),
     Input("color-scheme-toggle", "checked"),
+)
+
+# Clientside callback to enable/disable all items with "info-optional" in the id
+# do nothing if it finds no elements
+clientside_callback(
+    """
+    (switchOn) => {
+        const elements = document.querySelectorAll('[id*="info-optional"]');
+        if (elements.length === 0) {
+            return window.dash_clientside.no_update
+        }
+        elements.forEach(element => {
+            element.style.display = switchOn ? 'block' : 'none';
+        });
+        return window.dash_clientside.no_update
+    }
+    """,
+    Output("info-optional-toggle", "id"),
+    Input("info-optional-toggle", "checked"),
 )
 
 

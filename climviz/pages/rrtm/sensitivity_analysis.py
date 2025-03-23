@@ -60,6 +60,7 @@ param_selector_desc = dmc.Blockquote(
     """Select the parameters to vary in the sensitivity analysis and the range of values to vary them over.
     Press the run button to see the sensitivity analysis results.""",
     icon=DashIconify(icon="tabler:info-circle", width=30),
+    id=id_func("param-selector-desc-info-optional"),
     color="blue",
 )
 

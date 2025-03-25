@@ -1,5 +1,5 @@
 numpy
-climlab==0.9.1
+climlab
 git+https://github.com/climlab/climlab-rrtmg.git
 git+https://github.com/climlab/climlab-cam3-radiation
 git+https://github.com/climlab/climlab-emanuel-convection
@@ -7,8 +7,10 @@ matplotlib
 pooch
 dash
 dash_iconify
+dash_mantine_components
 pip
 icecream
 netcdf4
 h5netcdf
 pre-commit
+gunicorn

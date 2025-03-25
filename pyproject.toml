@@ -24,6 +24,7 @@ dependencies = [
     "climlab-cam3-radiation",
     "climlab-emanuel-convection",
     "pre-commit>=4.1.0",
+    "gunicorn>=23.0.0",
 ]
 
 [project.scripts]

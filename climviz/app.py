@@ -24,6 +24,7 @@ app = Dash(
     external_stylesheets=dmc.styles.ALL,
     suppress_callback_exceptions=True,
 )
+server = app.server
 
 # Style for the page
 dmc.add_figure_templates(default="mantine_light")

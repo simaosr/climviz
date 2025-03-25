@@ -34,11 +34,11 @@ RUN chown -R appuser:appuser /app
 # Switch to non-root user
 USER appuser
 
-# Expose port
-EXPOSE 8050
+# Expose port (use PORT env variable)
+EXPOSE $PORT
 
-# Add healthcheck
-HEALTHCHECK CMD curl --fail http://localhost:8050/ || exit 1
+# Add healthcheck (use PORT env variable)
+HEALTHCHECK CMD curl --fail http://localhost:$PORT/ || exit 1
 
-# Run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8050", "climviz.app:server"]
+# Run the application (use PORT env variable)
+CMD gunicorn --bind 0.0.0.0:$PORT climviz.app:server
